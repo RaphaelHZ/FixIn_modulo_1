@@ -1,0 +1,198 @@
+Algoritmo "FixIn"
+// Disciplina  : LOGICA DE PROGRAMACAO E ALGORITMOS
+// Professor   : Edson Shinki Kaneshima
+// Descrição   : Protótipo do aplicativo FIXIN
+// Autores     : Laryssa Stephanie Andrade da Costa Silva
+//             : Nathalia Denigris Paiva
+//             : Raphael Henrique Zanluqui
+VAR
+local: vetor [1..50] de caractere
+serv: vetor [1..50] de caractere
+nome: vetor [1..50] de caractere
+fone: vetor [1..50] de inteiro
+preco: vetor [1..50] de real
+notaapp: vetor [1..50] de real
+opcao: caractere
+espera: logico
+
+PROCEDIMENTO inicial
+//menu inicial
+INICIO
+LIMPATELA
+ESCREVAL ("Bem vindo ao FixIn")
+ESCREVAL ("")
+ESCREVAL ("O que gostaria hoje?")
+ESCREVAL ("")
+ESCREVAL ("1 - Buscar um profissional")
+ESCREVAL ("2 - Cadastrar meus serviços")
+ESCREVAL ("3 - Avaliar e sair")
+ESCREVAL ("")
+LEIA(opcao)
+ESCREVAL ("")
+ESCOLHA (opcao)
+  CASO ("1")
+//chama para o procedimento de busca de profissionais
+    ESCREVAL ("")
+    cliente
+  CASO ("2")
+//chama o procedimento de cadastro de atividades
+    ESCREVAL ("")
+    profissional
+  CASO ("3")
+//prossegue o fim do procedimento e devolve para avaliar e finalizar
+  CASO ("0")
+//Menu secreto, somente para verificar como estão as avaliações
+    ESCREVAL ("")
+    avaliacoes
+    ESCREVAL ("")
+  OUTROCASO
+//volta para o mesmo menu
+    ESCREVAL ("Opção Incorreta")
+    inicial
+FIMESCOLHA
+FIMPROCEDIMENTO
+
+PROCEDIMENTO cliente
+//busca de profissionais
+VAR
+cli_local, cli_serv: caractere
+cli_preco, valor_inf, valor_sup: real
+ind, cont: inteiro
+INICIO
+LIMPATELA
+cont := 0
+ESCREVAL ("")
+ESCREVAL ("BUSCA DE PROFISSIONAIS")
+ESCREVAL ("")
+ESCREVAL ("Em qual cidade gostaria de procurar?")
+LEIA (cli_local)
+ESCREVAL ("")
+ESCREVAL ("Que tipo de serviço?")
+LEIA (cli_serv)
+ESCREVAL ("")
+ESCREVAL ("Qual o valor aproximado?")
+LEIA (cli_preco)
+valor_inf := cli_preco - (cli_preco * 0.2)
+valor_sup := cli_preco + (cli_preco * 0.2)
+LIMPATELA
+ESCREVAL ("LISTA DE PROFISSIONAIS DE ", cli_serv, " NA CIDADE DE ", cli_local)
+ESCREVAL ("")
+//realiza a busca e lista os contatos
+PARA ind de 1 ate 50 FACA
+  SE (local[ind] = cli_local) E (serv[ind] = cli_serv) E (preco[ind] >= valor_inf) E (preco[ind] <= valor_sup) ENTAO
+    ESCREVAL ("NOME: ", nome[ind], " TELEFONE: ", fone[ind], " VALOR R$", preco[ind])
+    cont := cont + 1
+  FIMSE
+FIMPARA
+SE (cont = 0) ENTAO
+  ESCREVAL ("NÃO FORAM ENCONTRADOS PROFISSIONAIS")
+FIMSE
+LEIA (espera)
+inicial
+FIMPROCEDIMENTO
+
+PROCEDIMENTO profissional
+//cadastro da atividade do profissional
+VAR
+pro_local, pro_nome, pro_serv: caractere
+pro_fone: inteiro
+pro_preco: real
+ind, cont: inteiro
+INICIO
+LIMPATELA
+ind := 1
+cont := 0
+ESCREVAL ("")
+ESCREVAL ("CADASTRO DE SERVIÇOS")
+ESCREVAL ("")
+ESCREVAL ("Em qual cidade atua?")
+LEIA (pro_local)
+ESCREVAL ("")
+ESCREVAL ("Informe seu nome:")
+LEIA (pro_nome)
+ESCREVAL ("")
+ESCREVAL ("Informe seu telefone:")
+LEIA (pro_fone)
+ESCREVAL ("")
+ESCREVAL ("Qual o tipo de serviço?")
+LEIA (pro_serv)
+ESCREVAL ("")
+ESCREVAL ("Qual o valor cobrado?")
+LEIA (pro_preco)
+//verifica se todas as variáveis esão preenchidas
+SE (pro_local <> "") e (pro_nome <> "") e (pro_fone <> 0) e (pro_serv <> "") e (pro_preco <> 0) ENTAO
+//procura o primeiro vetor vazio e faz o cadastro de atividades
+  ENQUANTO cont = 0 FACA
+    SE (nome[ind] = "") ENTAO
+      local[ind] := pro_local
+      nome[ind] := pro_nome
+      fone[ind] := pro_fone
+      serv[ind] := pro_serv
+      preco[ind] := pro_preco
+      cont := 1
+    SENAO
+      ind := ind + 1
+    FIMSE
+  FIMENQUANTO
+  ESCREVAL ("Dados cadastrados com sucesso.")
+  LEIA (espera)
+SENAO
+  ESCREVAL ("Dados incompletos, retornando ao menu inicial.")
+  LEIA (espera)
+FIMSE
+inicial
+FIMPROCEDIMENTO
+
+PROCEDIMENTO avaliar
+//cadastro da nota do app
+VAR
+nota: real
+cont, ind : inteiro
+INICIO
+LIMPATELA
+ind := 1
+cont := 0
+ESCREVAL ("")
+ESCREVAL ("Com qual nota de 1 a 5 você avalia o aplicativo?")
+LEIA (nota)
+//verifica se a nota é válida
+SE (nota >= 1) E (nota <= 5) ENTAO
+//procura o primeiro vetor vazio e faz o cadastro da nota
+  ENQUANTO cont = 0 FACA
+    SE (notaapp[ind] = 0) ENTAO
+      notaapp[ind] := nota
+      cont := 1
+    SENAO
+      ind := ind + 1
+    FIMSE
+  FIMENQUANTO
+FIMSE
+ESCREVAL ("")
+ESCREVAL ("Obrigado por nos avaliar.")
+ESCREVAL ("")
+FIMPROCEDIMENTO
+
+PROCEDIMENTO avaliacoes
+//soma todas as variáveis do vetor nota e apresenta a média
+VAR
+nota: real
+ind, cont: inteiro
+INICIO
+nota := 0
+cont := 0
+LIMPATELA
+PARA ind DE 1 ATE 50 FACA
+  SE(notaapp[ind] <> 0) ENTAO
+    nota := nota + notaapp[ind]
+    cont := cont + 1
+  FIMSE
+FIMPARA
+ESCREVAL ("Avaliação média do aplicativo: ", nota / cont)
+LEIA (espera)
+inicial
+FIMPROCEDIMENTO
+
+INICIO
+inicial
+avaliar
+FIMALGORITMO

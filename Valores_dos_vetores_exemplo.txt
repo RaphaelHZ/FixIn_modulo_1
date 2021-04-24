@@ -1,0 +1,21 @@
+local[1] := "Londrina"	|serv[1] := "Pintura"		|nome[1] := "Marcio Silva"		|fone[1] := 33018429	|preco[1] := 41		|notaapp[1] := 4
+local[2] := "Londrina"	|serv[2] := "Limpeza"		|nome[2] := "Vitor Rodrigues"		|fone[2] := 33118858	|preco[2] := 24		|notaapp[2] := 5
+local[3] := "Cambe"	|serv[3] := "Pintura"		|nome[3] := "Manoel Henrique"		|fone[3] := 33346260	|preco[3] := 48		|notaapp[3] := 3
+local[4] := "Londrina"	|serv[4] := "Limpeza"		|nome[4] := "Marcio Moraes"		|fone[4] := 33245654	|preco[4] := 25		|notaapp[4] := 4
+local[5] := "Cambe"	|serv[5] := "Limpeza"		|nome[5] := "Rogerio Pereira"		|fone[5] := 33201920	|preco[5] := 49		|notaapp[5] := 5
+local[6] := "Cambe"	|serv[6] := "Pintura"		|nome[6] := "Adalberto Rodrigues"	|fone[6] := 33299824	|preco[6] := 46		|notaapp[6] := 4
+local[7] := "Londrina"	|serv[7] := "Pintura"		|nome[7] := "Adalgisa Andrade"		|fone[7] := 33385738	|preco[7] := 42		|notaapp[7] := 3
+local[8] := "Londrina"	|serv[8] := "Limpeza"		|nome[8] := "Jorge Torres"		|fone[8] := 33301180	|preco[8] := 22		|notaapp[8] := 1
+local[9] := "Ibipora"	|serv[9] := "Pintura"		|nome[9] := "Antonio Jose"		|fone[9] := 33335098	|preco[9] := 28		|notaapp[9] := 3
+local[10] := "Ibipora"	|serv[10] := "Pintura"		|nome[10] := "Marcia Rodrigues"		|fone[10] := 33333732	|preco[10] := 34	|notaapp[10] := 5
+local[11] := "Ibipora"	|serv[11] := "Marcenaria"	|nome[11] := "Edson Pereira"		|fone[11] := 33243960	|preco[11] := 25	|notaapp[11] := 4
+local[12] := "Londrina"	|serv[12] := "Marcenaria"	|nome[12] := "Mauro Augusto"		|fone[12] := 33025445	|preco[12] := 47	|notaapp[12] := 5
+local[13] := "Londrina"	|serv[13] := "Marcenaria"	|nome[13] := "Tiago Silveira"		|fone[13] := 33399891	|preco[13] := 39	|notaapp[13] := 4
+local[14] := "Londrina"	|serv[14] := "Marcenaria"	|nome[14] := "Fernando Souza"		|fone[14] := 33046319	|preco[14] := 31	|notaapp[14] := 1
+local[15] := "Cambe"	|serv[15] := "Marcenaria"	|nome[15] := "Rafael Matos"		|fone[15] := 33344189	|preco[15] := 49	|notaapp[15] := 3
+local[16] := "Cambe"	|serv[16] := "Limpeza"		|nome[16] := "Leonardo Pires"		|fone[16] := 33175104	|preco[16] := 41	|notaapp[16] := 4
+local[17] := "Cambe"	|serv[17] := "Limpeza"		|nome[17] := "Pedro Souza"		|fone[17] := 33349175	|preco[17] := 27	|notaapp[17] := 4
+local[18] := "Ibipora"	|serv[18] := "Marcenaria"	|nome[18] := "Daniela Silva"		|fone[18] := 33219298	|preco[18] := 37	|notaapp[18] := 5
+local[19] := "Ibipora"	|serv[19] := "Limpeza"		|nome[19] := "Cristina Dantas"		|fone[19] := 33034518	|preco[19] := 46	|notaapp[19] := 2
+local[20] := "Ibipora"	|serv[20] := "Limpeza"		|nome[20] := "Jose Silva"		|fone[20] := 33390600	|preco[20] := 31	|notaapp[20] := 3
+	

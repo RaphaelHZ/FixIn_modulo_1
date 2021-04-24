@@ -1,0 +1,326 @@
+Algoritmo "FixIn"
+// Disciplina  : LOGICA DE PROGRAMACAO E ALGORITMOS
+// Professor   : Edson Shinki Kaneshima
+// Descrição   : Protótipo do aplicativo FIXIN
+// Autores     : Laryssa Stephanie Andrade da Costa Silva
+//             : Nathalia Denigris Paiva
+//             : Raphael Henrique Zanluqui
+VAR
+local: vetor [1..50] de caractere
+serv: vetor [1..50] de caractere
+nome: vetor [1..50] de caractere
+fone: vetor [1..50] de inteiro
+preco: vetor [1..50] de real
+notaapp: vetor [1..50] de real
+opcao: caractere
+espera: logico
+
+PROCEDIMENTO inicial
+//menu inicial
+INICIO
+LIMPATELA
+ESCREVAL ("Bem vindo ao FixIn")
+ESCREVAL ("")
+ESCREVAL ("O que gostaria hoje?")
+ESCREVAL ("")
+ESCREVAL ("1 - Buscar um profissional")
+ESCREVAL ("2 - Cadastrar meus serviços")
+ESCREVAL ("3 - Avaliar e sair")
+ESCREVAL ("")
+LEIA(opcao)
+ESCREVAL ("")
+ESCOLHA (opcao)
+  CASO ("1")
+//chama para o procedimento de busca de profissionais
+    ESCREVAL ("")
+    cliente
+  CASO ("2")
+//chama o procedimento de cadastro de atividades
+    ESCREVAL ("")
+    profissional
+  CASO ("3")
+//prossegue o fim do procedimento e devolve para avaliar e finalizar
+  CASO ("0")
+//Menu secreto, somente para verificar como estão as avaliações
+    ESCREVAL ("")
+    avaliacoes
+    ESCREVAL ("")
+  OUTROCASO
+//volta para o mesmo menu
+    ESCREVAL ("Opção Incorreta")
+    inicial
+FIMESCOLHA
+FIMPROCEDIMENTO
+
+PROCEDIMENTO cliente
+//busca de profissionais
+VAR
+cli_local, cli_serv: caractere
+cli_preco, valor_inf, valor_sup: real
+ind, cont: inteiro
+INICIO
+LIMPATELA
+cont := 0
+ESCREVAL ("")
+ESCREVAL ("BUSCA DE PROFISSIONAIS")
+ESCREVAL ("")
+ESCREVAL ("Em qual cidade gostaria de procurar?")
+LEIA (cli_local)
+ESCREVAL ("")
+ESCREVAL ("Que tipo de serviço?")
+LEIA (cli_serv)
+ESCREVAL ("")
+ESCREVAL ("Qual o valor aproximado?")
+LEIA (cli_preco)
+valor_inf := cli_preco - (cli_preco * 0.2)
+valor_sup := cli_preco + (cli_preco * 0.2)
+LIMPATELA
+ESCREVAL ("LISTA DE PROFISSIONAIS DE ", cli_serv, " NA CIDADE DE ", cli_local)
+ESCREVAL ("")
+//realiza a busca e lista os contatos
+PARA ind de 1 ate 50 FACA
+  SE (local[ind] = cli_local) E (serv[ind] = cli_serv) E (preco[ind] >= valor_inf) E (preco[ind] <= valor_sup) ENTAO
+    ESCREVAL ("NOME: ", nome[ind], " TELEFONE: ", fone[ind], " VALOR R$", preco[ind])
+    cont := cont + 1
+  FIMSE
+FIMPARA
+SE (cont = 0) ENTAO
+  ESCREVAL ("NÃO FORAM ENCONTRADOS PROFISSIONAIS")
+FIMSE
+LEIA (espera)
+inicial
+FIMPROCEDIMENTO
+
+PROCEDIMENTO profissional
+//cadastro da atividade do profissional
+VAR
+pro_local, pro_nome, pro_serv: caractere
+pro_fone: inteiro
+pro_preco: real
+ind, cont: inteiro
+INICIO
+LIMPATELA
+ind := 1
+cont := 0
+ESCREVAL ("")
+ESCREVAL ("CADASTRO DE SERVIÇOS")
+ESCREVAL ("")
+ESCREVAL ("Em qual cidade atua?")
+LEIA (pro_local)
+ESCREVAL ("")
+ESCREVAL ("Informe seu nome:")
+LEIA (pro_nome)
+ESCREVAL ("")
+ESCREVAL ("Informe seu telefone:")
+LEIA (pro_fone)
+ESCREVAL ("")
+ESCREVAL ("Qual o tipo de serviço?")
+LEIA (pro_serv)
+ESCREVAL ("")
+ESCREVAL ("Qual o valor cobrado?")
+LEIA (pro_preco)
+//verifica se todas as variáveis esão preenchidas
+SE (pro_local <> "") e (pro_nome <> "") e (pro_fone <> 0) e (pro_serv <> "") e (pro_preco <> 0) ENTAO
+//procura o primeiro vetor vazio e faz o cadastro de atividades
+  ENQUANTO cont = 0 FACA
+    SE (nome[ind] = "") ENTAO
+      local[ind] := pro_local
+      nome[ind] := pro_nome
+      fone[ind] := pro_fone
+      serv[ind] := pro_serv
+      preco[ind] := pro_preco
+      cont := 1
+    SENAO
+      ind := ind + 1
+    FIMSE
+  FIMENQUANTO
+  ESCREVAL ("Dados cadastrados com sucesso.")
+  LEIA (espera)
+SENAO
+  ESCREVAL ("Dados incompletos, retornando ao menu inicial.")
+  LEIA (espera)
+FIMSE
+inicial
+FIMPROCEDIMENTO
+
+PROCEDIMENTO avaliar
+//cadastro da nota do app
+VAR
+nota: real
+cont, ind : inteiro
+INICIO
+LIMPATELA
+ind := 1
+cont := 0
+ESCREVAL ("")
+ESCREVAL ("Com qual nota de 1 a 5 você avalia o aplicativo?")
+LEIA (nota)
+//verifica se a nota é válida
+SE (nota >= 1) E (nota <= 5) ENTAO
+//procura o primeiro vetor vazio e faz o cadastro da nota
+  ENQUANTO cont = 0 FACA
+    SE (notaapp[ind] = 0) ENTAO
+      notaapp[ind] := nota
+      cont := 1
+    SENAO
+      ind := ind + 1
+    FIMSE
+  FIMENQUANTO
+FIMSE
+ESCREVAL ("")
+ESCREVAL ("Obrigado por nos avaliar.")
+ESCREVAL ("")
+FIMPROCEDIMENTO
+
+PROCEDIMENTO avaliacoes
+//soma todas as variáveis do vetor nota e apresenta a média
+VAR
+nota: real
+ind, cont: inteiro
+INICIO
+nota := 0
+cont := 0
+LIMPATELA
+PARA ind DE 1 ATE 50 FACA
+  SE(notaapp[ind] <> 0) ENTAO
+    nota := nota + notaapp[ind]
+    cont := cont + 1
+  FIMSE
+FIMPARA
+ESCREVAL ("Avaliação média do aplicativo: ", nota / cont)
+LEIA (espera)
+inicial
+FIMPROCEDIMENTO
+
+PROCEDIMENTO preenchimento
+//Insere valores nas variáveis, somente para testes
+VAR
+INICIO
+LIMPATELA
+local[1] := "Londrina"
+local[2] := "Londrina"
+local[3] := "Cambe"
+local[4] := "Londrina"
+local[5] := "Cambe"
+local[6] := "Cambe"
+local[7] := "Londrina"
+local[8] := "Londrina"
+local[9] := "Ibipora"
+local[10] := "Ibipora"
+local[11] := "Ibipora"
+local[12] := "Londrina"
+local[13] := "Londrina"
+local[14] := "Londrina"
+local[15] := "Cambe"
+local[16] := "Cambe"
+local[17] := "Cambe"
+local[18] := "Ibipora"
+local[19] := "Ibipora"
+local[20] := "Ibipora"
+serv[1] := "Pintura"
+serv[2] := "Limpeza"
+serv[3] := "Pintura"
+serv[4] := "Limpeza"
+serv[5] := "Limpeza"
+serv[6] := "Pintura"
+serv[7] := "Pintura"
+serv[8] := "Limpeza"
+serv[9] := "Pintura"
+serv[10] := "Pintura"
+serv[11] := "Marcenaria"
+serv[12] := "Marcenaria"
+serv[13] := "Marcenaria"
+serv[14] := "Marcenaria"
+serv[15] := "Marcenaria"
+serv[16] := "Limpeza"
+serv[17] := "Limpeza"
+serv[18] := "Marcenaria"
+serv[19] := "Limpeza"
+serv[20] := "Limpeza"
+nome[1] := "Marcio Silva"
+nome[2] := "Vitor Rodrigues"
+nome[3] := "Manoel Henrique"
+nome[4] := "Marcio Moraes"
+nome[5] := "Rogerio Pereira"
+nome[6] := "Adalberto Rodrigues"
+nome[7] := "Adalgisa Andrade"
+nome[8] := "Jorge Torres"
+nome[9] := "Antonio Jose"
+nome[10] := "Marcia Rodrigues"
+nome[11] := "Edson Pereira"
+nome[12] := "Mauro Augusto"
+nome[13] := "Tiago Silveira"
+nome[14] := "Fernando Souza"
+nome[15] := "Rafael Matos"
+nome[16] := "Leonardo Pires"
+nome[17] := "Pedro Souza"
+nome[18] := "Daniela Silva"
+nome[19] := "Cristina Dantas"
+nome[20] := "Jose Silva"
+fone[1] := 33018429
+fone[2] := 33118858
+fone[3] := 33346260
+fone[4] := 33245654
+fone[5] := 33201920
+fone[6] := 33299824
+fone[7] := 33385738
+fone[8] := 33301180
+fone[9] := 33335098
+fone[10] := 33333732
+fone[11] := 33243960
+fone[12] := 33025445
+fone[13] := 33399891
+fone[14] := 33046319
+fone[15] := 33344189
+fone[16] := 33175104
+fone[17] := 33349175
+fone[18] := 33219298
+fone[19] := 33034518
+fone[20] := 33390600
+preco[1] := 41
+preco[2] := 24
+preco[3] := 48
+preco[4] := 25
+preco[5] := 49
+preco[6] := 46
+preco[7] := 42
+preco[8] := 22
+preco[9] := 28
+preco[10] := 34
+preco[11] := 25
+preco[12] := 47
+preco[13] := 39
+preco[14] := 31
+preco[15] := 49
+preco[16] := 41
+preco[17] := 27
+preco[18] := 37
+preco[19] := 46
+preco[20] := 31
+notaapp[1] := 4
+notaapp[2] := 5
+notaapp[3] := 3
+notaapp[4] := 4
+notaapp[5] := 5
+notaapp[6] := 4
+notaapp[7] := 3
+notaapp[8] := 1
+notaapp[9] := 3
+notaapp[10] := 5
+notaapp[11] := 4
+notaapp[12] := 5
+notaapp[13] := 4
+notaapp[14] := 1
+notaapp[15] := 3
+notaapp[16] := 4
+notaapp[17] := 4
+notaapp[18] := 5
+notaapp[19] := 2
+notaapp[20] := 3
+FIMPROCEDIMENTO
+
+INICIO
+preenchimento
+inicial
+avaliar
+FIMALGORITMO
